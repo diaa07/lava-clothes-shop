@@ -72,7 +72,7 @@ const Home = () => {
         <div className="items-holder">
           {topRated.map((product, index) => {
             return (
-              <div className="top-prods">
+              <div className="top-prods" key={index}>
                 <ProductCard product={product} key={index} />
               </div>
             );
