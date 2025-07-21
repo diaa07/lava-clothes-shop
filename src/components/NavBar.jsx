@@ -7,6 +7,7 @@ const NavBar = () => {
   const { cart } = useContext(CartContext);
   const { favourites } = useContext(FavouritesContext);
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const firstPage = document.querySelector("#first-page");
@@ -40,20 +41,34 @@ const NavBar = () => {
       observer.disconnect();
     };
   }, []);
+
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
+
   return (
-    <nav className={scrolled ? "scrolled" : ""}>
-      <div className="left-part">
-        <h1>LAVA</h1>
-      </div>
-      <div className="right-part">
-        <button id="Home">Home</button>
-        <button id="Favs">
-          Favs <div className="cntr">{favourites.length}</div>
-        </button>
-        <button id="Cart">
-          Cart <div className="cntr">{cart.length}</div>
-        </button>
-        <button id="Me">Me</button>
+    <nav className={`${scrolled ? "scrolled" : ""} ${menuOpen ? "open" : ""}`}>
+      <div className="nav-container">
+        <div className="left-part">
+          <h1>LAVA</h1>
+        </div>
+
+        <div className="burger" onClick={toggleMenu}>
+          <div className={`bar ${menuOpen ? "open" : ""}`}></div>
+        </div>
+
+        <div className={`right-part ${menuOpen ? "show-menu" : ""}`}>
+          <button id="Home" onClick={() => setMenuOpen(false)}>
+            Home
+          </button>
+          <button id="Favs" onClick={() => setMenuOpen(false)}>
+            Favs <div className="cntr">{favourites.length}</div>
+          </button>
+          <button id="Cart" onClick={() => setMenuOpen(false)}>
+            Cart <div className="cntr">{cart.length}</div>
+          </button>
+          <button id="Me" onClick={() => setMenuOpen(false)}>
+            Me
+          </button>
+        </div>
       </div>
     </nav>
   );
