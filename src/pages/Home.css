@@ -1,0 +1,295 @@
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%) rotateY(45deg) scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) rotateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%) rotateY(-45deg) scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) rotateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes scrollLine {
+  0% {
+    background-position: 0 -100%;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) rotate(90deg) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(90deg) scale(1.1);
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shaker {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+.images-holder {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.images-holder::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.3);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.images-route {
+  display: flex;
+  height: 100%;
+  width: max-content;
+  animation: scroll 60s linear infinite;
+  z-index: 1;
+}
+
+.images-holder img {
+  display: inline-block;
+  height: 100vh;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.first-page {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+.info-part {
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 40vw;
+}
+
+.info-part h4 {
+  font-size: var(--fourth);
+  font-weight: 300;
+  text-align: left;
+}
+
+.info-part h2 {
+  width: 100%;
+  font-weight: 500;
+  text-align: left;
+}
+
+.info-part button {
+  all: unset;
+  font-size: var(--fourth);
+  cursor: pointer;
+  margin-top: 10px;
+  color: var(--text);
+  background-color: var(--yellow);
+  padding: 2px 5px;
+}
+
+.odd-img {
+  animation: fadeInUp 2s ease-in;
+}
+
+.even-img {
+  animation: fadeInDown 2s ease-in;
+}
+
+.select-gender {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.select-gender .sec {
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+}
+
+.select-gender img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.select-gender .sec:hover img {
+  opacity: 0.4;
+}
+
+.select-gender .sec:hover h2 {
+  opacity: 1;
+}
+.select-gender h2 {
+  position: absolute;
+  opacity: 0;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.select-gender .left-sec {
+  animation: slideInLeft ease-in;
+  animation-timeline: view();
+  animation-range: entry 0%;
+}
+
+.select-gender .right-sec {
+  animation: slideInRight ease-in;
+  animation-timeline: view();
+  animation-range: entry 0%;
+}
+
+.scroll-indicator {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+  pointer-events: none;
+  animation: appear ease-in;
+  animation-timeline: view();
+  animation-range: entry 0% cover 50%;
+}
+
+.scroll-line {
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 30%,
+    rgba(0, 0, 0, 1) 70%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  animation: scrollLine 2.5s infinite linear;
+}
+
+.scroll-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(90deg);
+  color: black;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 5px 10px;
+  border-radius: 20px;
+  animation: pulse 2s infinite;
+}
+
+.top-items {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-items h2 {
+  animation: shaker 3s infinite;
+}
+
+.items-holder {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 40px 60px;
+  justify-items: center;
+}
+
+.top-prods {
+  display: inline;
+  animation: appear ease-in;
+  animation-timeline: view();
+  animation-range: entry 0% cover 50%;
+}
