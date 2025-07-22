@@ -212,6 +212,15 @@
   transform: translateX(-50%) translateY(-50%);
 }
 
+@media (max-width: 600px) {
+  .select-gender h2 {
+    opacity: 1;
+  }
+  .select-gender img {
+    opacity: 0.4;
+  }
+}
+
 .select-gender .left-sec {
   animation: slideInLeft ease-in;
   animation-timeline: view();
