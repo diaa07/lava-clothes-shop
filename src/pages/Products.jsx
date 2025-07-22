@@ -16,14 +16,17 @@ const Products = () => {
   }, []);
 
   useEffect(() => {
-    const filtered = products.filter(
-      (product) =>
-        product[property]?.toString().toLowerCase() === value.toLowerCase()
-    );
+    const filtered = products.filter((product) => {
+      const productValue = product[property]?.toString().toLowerCase() || "";
+      const paramValue = value?.toString().toLowerCase() || "";
+      return productValue === paramValue;
+    });
 
-    if (property === "category") {
+    if (property?.toLowerCase() === "category") {
       const byGender = filtered.reduce((acc, product) => {
-        const genderKey = product.gender || "unknown";
+        const genderKey = (product.gender || "unknown")
+          .toString()
+          .toLowerCase();
         if (!acc[genderKey]) acc[genderKey] = [];
         acc[genderKey].push(product);
         return acc;
@@ -35,9 +38,11 @@ const Products = () => {
           return acc;
         }, {})
       );
-    } else if (property === "gender") {
+    } else if (property?.toLowerCase() === "gender") {
       const byCategory = filtered.reduce((acc, product) => {
-        const categoryKey = product.category || "unknown";
+        const categoryKey = (product.category || "unknown")
+          .toString()
+          .toLowerCase();
         if (!acc[categoryKey]) acc[categoryKey] = [];
         acc[categoryKey].push(product);
         return acc;
