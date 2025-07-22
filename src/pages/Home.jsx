@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import "./Home.css";
 import ProductCard from "../components/ProductCard";
 import { useProducts } from "../contexts/ProductsContext";
@@ -12,6 +12,17 @@ const Home = () => {
   });
   const images = Object.values(imgs);
   const { products, topRated } = useProducts();
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div className="home">
@@ -32,7 +43,7 @@ const Home = () => {
               window.history.replaceState(null, null, " ");
             }}
           >
-            Start your fashion journey today{" "}
+            {!isMobile ? "Start your fashion journey today  " : "Shop now  "}
             <span style={{ fontSize: "16px", fontWeight: "bolder" }}>
               &rarr;
             </span>{" "}
