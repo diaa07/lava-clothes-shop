@@ -15,15 +15,17 @@ const NavBar = () => {
   return (
     <nav className={`${menuOpen ? "open" : ""}`}>
       <div className="nav-container">
-        <div
-          className="left-part"
-          onClick={(e) => {
-            e.preventDefault();
-            setMenuOpen(false);
-            navigate("/");
-          }}
-        >
-          <h1>LAVA</h1>
+        <div className="left-part">
+          <h1
+            onClick={(e) => {
+              e.preventDefault();
+              setMenuOpen(false);
+              navigate("/");
+              window.scrollTo(0, 0);
+            }}
+          >
+            LAVA
+          </h1>
         </div>
 
         <div className="burger" onClick={toggleMenu}>
@@ -37,6 +39,7 @@ const NavBar = () => {
               e.preventDefault();
               setMenuOpen(false);
               navigate("/");
+              window.scrollTo(0, 0);
             }}
           >
             Home

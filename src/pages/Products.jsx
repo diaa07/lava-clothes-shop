@@ -9,6 +9,8 @@ const Products = () => {
   const { products } = useProducts();
 
   const [groupedProducts, setGroupedProducts] = useState({});
+  const [expandedGroups, setExpandedGroups] = useState({});
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
@@ -27,6 +29,12 @@ const Products = () => {
         return acc;
       }, {});
       setGroupedProducts(byGender);
+      setExpandedGroups(
+        Object.keys(byGender).reduce((acc, key) => {
+          acc[key] = true;
+          return acc;
+        }, {})
+      );
     } else if (property === "gender") {
       const byCategory = filtered.reduce((acc, product) => {
         const categoryKey = product.category || "unknown";
@@ -35,10 +43,24 @@ const Products = () => {
         return acc;
       }, {});
       setGroupedProducts(byCategory);
+      setExpandedGroups(
+        Object.keys(byCategory).reduce((acc, key) => {
+          acc[key] = true;
+          return acc;
+        }, {})
+      );
     } else {
       setGroupedProducts({ all: filtered });
+      setExpandedGroups({ all: true });
     }
   }, [products, property, value]);
+
+  const toggleGroup = (groupName) => {
+    setExpandedGroups((prev) => ({
+      ...prev,
+      [groupName]: !prev[groupName],
+    }));
+  };
 
   return (
     <div className="Products-page">
@@ -46,12 +68,24 @@ const Products = () => {
 
       {Object.entries(groupedProducts).map(([groupName, prods]) => (
         <div key={groupName} className="product-group">
-          <h3 style={{ textTransform: "capitalize" }}>{groupName}</h3>
-          <div className="products-holder">
-            {prods.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+          <div className="group-header">
+            <h3 style={{ textTransform: "capitalize" }}>
+              {groupName}
+              <button
+                className="toggle-btn"
+                onClick={() => toggleGroup(groupName)}
+              >
+                {expandedGroups[groupName] ? "−" : "+"}
+              </button>
+            </h3>
           </div>
+          {expandedGroups[groupName] && (
+            <div className="products-holder">
+              {prods.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
         </div>
       ))}
     </div>

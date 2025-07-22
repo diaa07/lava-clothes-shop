@@ -64,6 +64,49 @@
   }
 }
 
+.group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  transition: background-color 0.2s;
+}
+
+.group-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.8rem;
+  margin-bottom: 0;
+  color: #444;
+  padding-left: 1rem;
+  border-left: 4px solid #ff6b6b;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+  color: #ff6b6b;
+  padding: 0;
+}
+
+.toggle-btn:hover {
+  background-color: #ff6b6b20;
+}
+
 @media (max-width: 480px) {
   .products-holder {
     grid-template-columns: 1fr;
