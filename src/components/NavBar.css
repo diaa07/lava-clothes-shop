@@ -12,9 +12,10 @@ nav {
   left: 0;
   right: 0;
   z-index: 999999;
-  color: var(--text);
-  background: hsla(0, 0%, 10%, 0.1);
+  color: black;
+  background-color: white;
   overflow-x: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .nav-container {

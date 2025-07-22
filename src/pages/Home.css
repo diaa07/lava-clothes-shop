@@ -215,13 +215,13 @@
 .select-gender .left-sec {
   animation: slideInLeft ease-in;
   animation-timeline: view();
-  animation-range: entry 0%;
+  animation-range: entry 0% cover 40%;
 }
 
 .select-gender .right-sec {
   animation: slideInRight ease-in;
   animation-timeline: view();
-  animation-range: entry 0%;
+  animation-range: entry 0% cover 40%;
 }
 
 .scroll-indicator {

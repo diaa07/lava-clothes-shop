@@ -2,10 +2,17 @@ import { React, useState, useEffect } from "react";
 import "./Home.css";
 import ProductCard from "../components/ProductCard";
 import { useProducts } from "../contexts/ProductsContext";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import womenIMG from "../assets/imgs/women.jpg";
 import menIMG from "../assets/imgs/men.jpg";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const handleClick = (gender) => {
+    navigate(`/products/gender/${gender}`);
+  };
   const imgs = import.meta.glob("../assets/bg/*.{jpg,jpeg,png,webp}", {
     eager: true,
     import: "default",
@@ -22,6 +29,9 @@ const Home = () => {
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   const [cats, setCats] = useState([]);
@@ -64,8 +74,10 @@ const Home = () => {
           <button
             onClick={(e) => {
               e.preventDefault();
-              window.location.href = "#gender-sec";
-              window.history.replaceState(null, null, " ");
+              const target = document.getElementById("gender-sec");
+              if (target) {
+                target.scrollIntoView({ behavior: "smooth" });
+              }
             }}
           >
             {!isMobile ? "Start your fashion journey today  " : "Shop now  "}
@@ -94,12 +106,13 @@ const Home = () => {
           <div className="scroll-line"></div>
           <div className="scroll-text">SCROLL DOWN</div>
         </div>
-        <div className="sec left-sec">
-          <img src={womenIMG} alt="" />
+        <div className="sec left-sec" onClick={() => handleClick("women")}>
+          <img src={womenIMG} alt="women" />
           <h2>LAVA women</h2>
         </div>
-        <div className="sec right-sec">
-          <img src={menIMG} alt="" />
+
+        <div className="sec right-sec" onClick={() => handleClick("men")}>
+          <img src={menIMG} alt="men" />
           <h2>LAVA men</h2>
         </div>
       </div>
@@ -120,10 +133,17 @@ const Home = () => {
         <div className="cats-container">
           {catProds.map(({ category, image }) => {
             return (
-              <div className="cat-card" key={category}>
-                <img src={image} alt="" />
-                <h4>{category}</h4>
-              </div>
+              <Link
+                key={category}
+                to={`/products/category/${category}`}
+                className="cat-card-link"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <div className="cat-card">
+                  <img src={image} alt={category} />
+                  <h4>{category}</h4>
+                </div>
+              </Link>
             );
           })}
         </div>
