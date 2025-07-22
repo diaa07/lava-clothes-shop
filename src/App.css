@@ -33,5 +33,4 @@ body {
   color: var(--text);
   min-height: 100vh;
   font-family: "Poppins", sans-serif;
-  overflow-x: hidden;
 }
