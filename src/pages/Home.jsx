@@ -24,6 +24,31 @@ const Home = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const [cats, setCats] = useState([]);
+  useEffect(() => {
+    if (products.length > 0) {
+      const uniqueCats = [...new Set(products.map((p) => p.category))];
+      setCats(uniqueCats);
+    }
+  }, [products]);
+
+  const [catProds, setCatProds] = useState([]);
+
+  useEffect(() => {
+    if (cats.length === 0 || products.length === 0) return;
+
+    const catImages = cats.map((cat) => {
+      const matchedProduct = products.find(
+        (product) => product.category === cat
+      );
+      return {
+        category: cat,
+        image: matchedProduct?.image_url || null,
+      };
+    });
+    setCatProds(catImages);
+  }, [cats, products]);
+
   return (
     <div className="home">
       <div className="first-page" id="first-page">
@@ -85,6 +110,19 @@ const Home = () => {
             return (
               <div className="top-prods" key={index}>
                 <ProductCard product={product} key={index} />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className="cats-page">
+        <h2>Explore categories</h2>
+        <div className="cats-container">
+          {catProds.map(({ category, image }) => {
+            return (
+              <div className="cat-card" key={category}>
+                <img src={image} alt="" />
+                <h4>{category}</h4>
               </div>
             );
           })}
