@@ -107,6 +107,12 @@
   background-color: #ff6b6b20;
 }
 
+.products-holder .product-card {
+  animation: appear ease-in;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+}
+
 @media (max-width: 480px) {
   .products-holder {
     grid-template-columns: 1fr;
