@@ -47,7 +47,14 @@ const NavBar = () => {
   return (
     <nav className={`${scrolled ? "scrolled" : ""} ${menuOpen ? "open" : ""}`}>
       <div className="nav-container">
-        <div className="left-part">
+        <div
+          className="left-part"
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.href = "#first-page";
+            window.history.replaceState(null, null, " ");
+          }}
+        >
           <h1>LAVA</h1>
         </div>
 
@@ -56,7 +63,15 @@ const NavBar = () => {
         </div>
 
         <div className={`right-part ${menuOpen ? "show-menu" : ""}`}>
-          <button id="Home" onClick={() => setMenuOpen(false)}>
+          <button
+            id="Home"
+            onClick={(e) => {
+              setMenuOpen(false);
+              e.preventDefault();
+              window.location.href = "#first-page";
+              window.history.replaceState(null, null, " ");
+            }}
+          >
             Home
           </button>
           <button id="Favs" onClick={() => setMenuOpen(false)}>
