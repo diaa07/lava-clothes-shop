@@ -9,6 +9,7 @@
   flex-direction: column;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
+  position: relative;
 }
 
 .product-card:hover {
@@ -16,14 +17,66 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
+.product-header {
+  position: relative;
+  height: 220px;
+}
+
 .product-card img {
   width: 100%;
-  height: 220px;
+  height: 100%;
   object-fit: contain;
   background-color: #f3f3f3;
   padding: 12px;
-  align-self: center;
   border-bottom: 1px solid #eee;
+}
+
+.favourite-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #ccc;
+  z-index: 2;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.favourite-btn.active {
+  color: #ff4d4d;
+  animation: heartBeat 0.5s;
+}
+
+.favourite-btn:hover {
+  transform: scale(1.1);
+  background-color: white;
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .lower-part {
@@ -75,8 +128,6 @@
   margin-top: 8px;
   width: 100%;
   padding: 10px;
-  background-color: #000;
-  color: white;
   font-weight: 500;
   font-size: 14px;
   border: none;
@@ -85,10 +136,33 @@
   transition: all 0.2s ease;
 }
 
-.product-info button:active {
-  transform: scale(0.8);
+.add-btn {
+  background-color: #000;
+  color: white;
+}
+
+.remove-btn {
+  background-color: #ff4444;
+  color: white;
 }
 
 .product-info button:hover {
-  background-color: #222;
+  opacity: 0.9;
+}
+
+.product-info button:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+  .product-card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .favourite-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
 }
