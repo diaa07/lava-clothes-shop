@@ -1,12 +1,15 @@
 import React, { useContext, useState } from "react";
 import "./NavBar.css";
-import { CartContext } from "../contexts/CartContext";
-import { FavouritesContext } from "../contexts/FavouritesContext";
+import { useCart } from "../contexts/CartContext";
+import {
+  FavouritesContext,
+  useFavourites,
+} from "../contexts/FavouritesContext";
 import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
-  const { cart } = useContext(CartContext);
-  const { favourites } = useContext(FavouritesContext);
+  const { cart } = useCart();
+  const { favourites } = useFavourites();
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -45,10 +48,10 @@ const NavBar = () => {
             Home
           </button>
           <button id="Favs" onClick={() => setMenuOpen(false)}>
-            Favs <div className="cntr">{favourites.length}</div>
+            Favs <div className="cntr">{favourites?.length || 0}</div>
           </button>
           <button id="Cart" onClick={() => setMenuOpen(false)}>
-            Cart <div className="cntr">{cart.length}</div>
+            Cart <div className="cntr">{cart?.length || 0}</div>
           </button>
           <button id="Me" onClick={() => setMenuOpen(false)}>
             Me

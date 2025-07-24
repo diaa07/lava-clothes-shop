@@ -6,13 +6,12 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const toggleCart = (product) => {
     setCart((prev) => {
-      prev.find((p) => {
-        p.id === product.id;
-      })
-        ? prev.filter((p) => {
-            p.id !== product.id;
-          })
-        : [...prev, product];
+      const existingProduct = prev.find((p) => p.id === product.id);
+      if (existingProduct) {
+        return prev.filter((p) => p.id !== product.id);
+      } else {
+        return [...prev, product];
+      }
     });
   };
   return (
